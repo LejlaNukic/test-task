@@ -1,0 +1,16 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Number of Tweets</th>
+      <th>Number of Followers</th>
+      <th>Number of Followings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="userProfileDetails">
+      <td>{{userProfileDetails.numberOfTweets}}</td>
+      <td>{{userProfileDetails.numberOfFollowers}}</td>
+      <td>{{userProfileDetails.numberOfFollowings}}</td>
+    </tr>
+  </tbody>
+</table>
