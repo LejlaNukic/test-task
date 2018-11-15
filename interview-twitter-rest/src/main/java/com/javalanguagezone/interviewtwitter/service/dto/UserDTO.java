@@ -11,9 +11,11 @@ import static lombok.AccessLevel.PRIVATE;
 public class UserDTO {
   private Long id;
   private String username;
+  private String fullname;
 
   public UserDTO(User user) {
     this.id = user.getId();
     this.username = user.getUsername();
+    this.fullname = user.getFullname();
   }
 }
