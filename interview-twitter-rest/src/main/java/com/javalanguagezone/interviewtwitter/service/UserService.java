@@ -3,6 +3,7 @@ package com.javalanguagezone.interviewtwitter.service;
 import com.javalanguagezone.interviewtwitter.domain.User;
 import com.javalanguagezone.interviewtwitter.repository.UserRepository;
 import com.javalanguagezone.interviewtwitter.service.dto.UserDTO;
+import com.javalanguagezone.interviewtwitter.service.dto.UserRegistrationDTO;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -45,6 +46,17 @@ public class UserService implements UserDetailsService {
     return convertUsersToDTOs(user.getFollowers());
   }
 
+  @Transactional
+  public UserRegistrationDTO registerUser(UserRegistrationDTO user) {
+    User newUser = new User(user.getUsername(),user.getPassword(),user.getFullname());
+    if (!newUser.isValid())
+      throw new InvalidUserException(user);
+    User saved = userRepository.save(newUser);
+    System.out.print("OBJEKAT KREIRAN");
+    System.out.print(userRepository.findOneByUsername(user.getUsername()));
+    return new UserRegistrationDTO(saved);
+  }
+
   public long countUserFollowers(Principal principal) {
     User user = getUser(principal.getName());
     return userRepository.countUsersByFollowingIsContaining(user);
@@ -61,5 +73,12 @@ public class UserService implements UserDetailsService {
 
   private List<UserDTO> convertUsersToDTOs(Set<User> users) {
     return users.stream().map(UserDTO::new).collect(toList());
+  }
+
+  public static class InvalidUserException extends RuntimeException {
+
+    private InvalidUserException(UserRegistrationDTO user) {
+      super("'" +  user.getUsername() + "'");
+    }
   }
 }

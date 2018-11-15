@@ -39,4 +39,10 @@ export class LoginComponent {
     const passwordFormControl = loginForm.form.controls['password'];
     return loginForm.submitted && passwordFormControl && !passwordFormControl.valid;
   }
+
+  navigateToRegistration() {
+    console.log("radi li klik");
+    
+    this.router.navigate(['/register']);
+  }
 }

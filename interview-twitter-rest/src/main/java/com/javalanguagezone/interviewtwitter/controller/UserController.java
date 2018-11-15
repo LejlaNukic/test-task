@@ -1,12 +1,15 @@
 package com.javalanguagezone.interviewtwitter.controller;
 
+import com.javalanguagezone.interviewtwitter.domain.User;
 import com.javalanguagezone.interviewtwitter.service.UserService;
 import com.javalanguagezone.interviewtwitter.service.dto.UserDTO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.javalanguagezone.interviewtwitter.service.dto.UserRegistrationDTO;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Collection;
+
+import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 public class UserController {
@@ -32,4 +35,12 @@ public class UserController {
 
   @GetMapping("/countfollowings")
   public long countUserFollowings(Principal principal) {return  userService.countUserFollowings(principal); }
+
+  @PostMapping(path = "/register")
+  @ResponseStatus(CREATED)
+  public UserRegistrationDTO registerUser(@RequestBody UserRegistrationDTO user) {
+    System.out.print("OBJEKAT KREIRAN");
+    System.out.print(user);
+    return userService.registerUser(user);
+  }
 }
