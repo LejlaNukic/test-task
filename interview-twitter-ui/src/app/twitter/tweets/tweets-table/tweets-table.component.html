@@ -9,8 +9,12 @@
   <tbody>
   <tr *ngFor="let tweet of tweets">
     <td>{{tweet.id}}</td>
-    <td><a routerLink="/app/tweets/{{tweet.author}}">{{tweet.author}}: {{tweet.authorFullname}}</a></td>
+    <td><a routerLink="/app/tweets/{{tweet.author}}">{{tweet.author}}: <span *ngIf="tweet.authorFullname; else defaultFullnameShowOption"><i>{{tweet.authorFullname}}</i></span></a></td>
     <td>{{tweet.content}}</td>
   </tr>
   </tbody>
 </table>
+
+<ng-template #defaultFullnameShowOption>
+    <span><i>no fullname</i></span>
+</ng-template>
