@@ -12,7 +12,6 @@ export class RegistrationComponent {
   model: any = {username: '', password: '', fullname: ''};
   error: null;
   loading = false;
-  incorrectCredentialsError = false;
 
   constructor(private router: Router, private registrationService: RegistrationService) { }
 
@@ -36,6 +35,10 @@ export class RegistrationComponent {
   isFormSubmittedWithInvalidUsername(registrationForm: NgForm): boolean {
     const usernameFormControl = registrationForm.form.controls['username'];
     return registrationForm.submitted && usernameFormControl && !usernameFormControl.valid;
+  }
+
+  isFormSubmittedWithAlreadyTakenUsername(registrationForm: NgForm): boolean {
+    return registrationForm.submitted && this.error == null;
   }
 
   isFormSubmittedWithInvalidPassword(registrationForm: NgForm): boolean {

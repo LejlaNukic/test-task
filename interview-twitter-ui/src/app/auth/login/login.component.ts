@@ -40,9 +40,7 @@ export class LoginComponent {
     return loginForm.submitted && passwordFormControl && !passwordFormControl.valid;
   }
 
-  navigateToRegistration() {
-    console.log("radi li klik");
-    
+  navigateToRegistration() {    
     this.router.navigate(['/register']);
   }
 }
