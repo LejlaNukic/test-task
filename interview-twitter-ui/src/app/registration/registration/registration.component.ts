@@ -10,6 +10,7 @@ import { RegistrationService } from '../../services/registration.service';
 })
 export class RegistrationComponent {
   model: any = {username: '', password: '', fullname: ''};
+  error: null;
   loading = false;
   incorrectCredentialsError = false;
 
@@ -23,8 +24,13 @@ export class RegistrationComponent {
 
   register() {
     this.loading = true;
-    this.registrationService.register(this.model).subscribe(() => console.log("user added"));
-    this.router.navigate(['/login']);
+    this.registrationService.register(this.model)
+        .subscribe(
+          () => this.router.navigate(['/login']),
+          error => {
+            this.error = error;
+          }
+        );
   }
 
   isFormSubmittedWithInvalidUsername(registrationForm: NgForm): boolean {

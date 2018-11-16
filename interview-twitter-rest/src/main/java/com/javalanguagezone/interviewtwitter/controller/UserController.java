@@ -39,8 +39,6 @@ public class UserController {
   @PostMapping(path = "/register")
   @ResponseStatus(CREATED)
   public UserRegistrationDTO registerUser(@RequestBody UserRegistrationDTO user) {
-    System.out.print("OBJEKAT KREIRAN");
-    System.out.print(user);
     return userService.registerUser(user);
   }
 }

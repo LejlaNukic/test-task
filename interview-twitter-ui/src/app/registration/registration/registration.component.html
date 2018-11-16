@@ -10,6 +10,7 @@
                required
                minlength="1"/>
         <div *ngIf="isFormSubmittedWithInvalidUsername(f)" class="help-block">Username is required</div>
+        <div *ngIf="error != null " class="help-block">Username is already taken.</div>
       </div>
       <div class="form-group">
         <label for="password">Password</label>

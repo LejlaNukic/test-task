@@ -13,7 +13,6 @@ export class RegistrationService {
   }
 
   register(userContent: UserModel): Observable<any> {
-    console.log("dosli u servis");
     return this.http.post<UserModel>(ENDPOINT_BASE, userContent);
   }
 }

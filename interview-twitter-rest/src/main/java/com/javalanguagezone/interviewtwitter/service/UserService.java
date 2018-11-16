@@ -47,13 +47,11 @@ public class UserService implements UserDetailsService {
   }
 
   @Transactional
-  public UserRegistrationDTO registerUser(UserRegistrationDTO user) {
+  public UserRegistrationDTO registerUser(UserRegistrationDTO user) throws InvalidUserException {
     User newUser = new User(user.getUsername(),user.getPassword(),user.getFullname());
-    if (!newUser.isValid())
+    if (!newUser.isValid() || getUser(user.getUsername()) != null)
       throw new InvalidUserException(user);
     User saved = userRepository.save(newUser);
-    System.out.print("OBJEKAT KREIRAN");
-    System.out.print(userRepository.findOneByUsername(user.getUsername()));
     return new UserRegistrationDTO(saved);
   }
 
